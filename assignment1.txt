@@ -1,9 +1,0 @@
-Employee
------------
-Clerk
-Programmer
-Manager
- 
-name, age, salary, designation
-display()
-raiseSalary()

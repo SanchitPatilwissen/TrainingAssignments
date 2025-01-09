@@ -1,6 +1,6 @@
 // Clerk (salary:20000 + incr:2000), Programmer (30000 + 5000), Manager (100000 + 15000)
  
-// java EmployeeManagementApp
+// java Employee2ManagementApp
  
 // ---------------------
 
@@ -50,7 +50,7 @@
  
  
  
-// Total no. of employees created/added : 7
+// Total no. of Employee2s created/added : 7
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ import java.io.InputStreamReader;
 abstract class Employee2{
     private String name;
     private int age;
-    private double salary;
+    double salary;
  
     Employee2(String var1, int var2, double var3) {
        this.name = var1;
@@ -70,14 +70,12 @@ abstract class Employee2{
     }
  
     void display() {
-        System.out.println("-------------------------------------------------------------------------------\n");
-        System.out.println("The following are the details of this employee : \nName : " + this.name + "\nAge : " + this.age + "\nSalary : " + this.salary);
-        System.out.println("\n-------------------------------------------------------------------------------");
+        System.out.println("\n\n");
+        System.out.println("The following are the details of this Employee : \nName : " + this.name + "\nAge : " + this.age + "\nSalary : " + this.salary);
+        System.out.println("\n\n");
     }
  
-    void raiseSalary(int var1) {
-       this.salary += (double)var1;
-    }
+    abstract void raiseSalary();
 }
 
 class Clerk extends Employee2{
@@ -86,7 +84,7 @@ class Clerk extends Employee2{
     }
 
     void raiseSalary() {
-        raiseSalary(2000);
+        salary += 2000;
     }
 }
 
@@ -96,7 +94,7 @@ class Programmer extends Employee2{
     }
 
     void raiseSalary() {
-        raiseSalary(5000);
+        salary += 5000;
     }
 }
 
@@ -106,7 +104,8 @@ class Manager extends Employee2{
     }
 
     void raiseSalary() {
-        raiseSalary(15000);
+        salary += 15000;
+
     }
 }
 
@@ -115,11 +114,8 @@ public class Assignment2 {
         Scanner sc = new Scanner(System.in);
 
         Boolean looping = true;
-        
-        ArrayList<Clerk> clerks = new ArrayList<Clerk>();
-        ArrayList<Programmer> programmers = new ArrayList<Programmer>();
-        ArrayList<Manager> managers = new ArrayList<Manager>();
 
+        ArrayList<Employee2> employees = new ArrayList<Employee2>();
 
         InputStreamReader r=new InputStreamReader(System.in);    
         BufferedReader br=new BufferedReader(r);
@@ -146,16 +142,16 @@ public class Assignment2 {
                     int age = sc.nextInt();
 
                     if(num2 == 1){
-                        Clerk c = new Clerk(name, age);
-                        clerks.add(c);
+                        Employee2 c = new Clerk(name, age);
+                        employees.add(c);
                     }
                     else if(num2 == 2){
-                        Programmer c = new Programmer(name, age);
-                        programmers.add(c);
+                        Employee2 c = new Programmer(name, age);
+                        employees.add(c);
                     }
                     else if(num2 == 3){
-                        Manager c = new Manager(name, age);
-                        managers.add(c);
+                        Employee2 c = new Manager(name, age);
+                        employees.add(c);
                     }
                     else{
                         System.out.println("Please enter a valid number!");
@@ -165,32 +161,14 @@ public class Assignment2 {
                 }
             }
             else if(num == 2){
-                int j = 0;
-                for(int i=0;i<clerks.size();i++){
-                    System.out.println((j+1)+" Employee");
-                    clerks.get(i).display();
-                    j++;
-                }
-                for(int i=0;i<programmers.size();i++){
-                    System.out.println((j+1)+" Employee");
-                    programmers.get(i).display();
-                    j++;
-                }
-                for(int i=0;i<managers.size();i++){
-                    System.out.println((j+1)+" Employee");
-                    managers.get(i).display();
-                    j++;
+                for(int i=0;i<employees.size();i++){
+                    System.out.println("Employee "+(i+1));
+                    employees.get(i).display();
                 }
             }
             else if(num == 3){
-                for(int i=0;i<clerks.size();i++){
-                    clerks.get(i).raiseSalary();
-                }
-                for(int i=0;i<programmers.size();i++){
-                    programmers.get(i).raiseSalary();
-                }
-                for(int i=0;i<managers.size();i++){
-                    managers.get(i).raiseSalary();
+                for(int i=0;i<employees.size();i++){
+                    employees.get(i).raiseSalary();
                 }
             }
             else if(num == 4){
@@ -205,3 +183,9 @@ public class Assignment2 {
         sc.close();
     }
 }
+
+
+// IMPROVEMENTS : 
+
+// 1) Make Employee2 class abstract so that no one can create an object of Employee2
+// 2) You can use do while loop since it is better.

@@ -58,7 +58,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-class Employee2{
+abstract class Employee2{
     private String name;
     private int age;
     private double salary;

@@ -2,6 +2,7 @@ package emp;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -71,26 +72,6 @@ final class Manager extends Employee{
     }
 }
 
-class AgeException extends RuntimeException{
-    AgeException(){
-        super();
-    }
-
-    AgeException(String s){
-        super(s);
-    }
-}
-
-class IdException extends RuntimeException{
-    IdException(){
-        super();
-    }
-
-    IdException(String s){
-        super(s);
-    }
-}
-
 class ChoiceException extends RuntimeException{
     ChoiceException(){
         super();
@@ -98,6 +79,42 @@ class ChoiceException extends RuntimeException{
 
     ChoiceException(String s){
         super(s);
+    }
+
+    void display(int lower, int upper){
+        System.out.print("Please enter in range "+lower+" - "+upper+" : ");
+    }
+}
+
+class Menu{
+    private static int lower;
+    private static int upper;
+
+    static int readChoice(int low, int up){
+        lower = low;
+        upper = up;
+
+        Scanner sc = new Scanner(System.in);
+
+        int choice;
+        
+        while(true){
+            try{
+                choice = sc.nextInt();
+                if(choice<lower || choice>upper)
+                    throw new ChoiceException();
+                break;
+            }
+            catch(ChoiceException e){
+                e.display(lower, upper);
+            }
+            catch(Exception e){
+                System.out.print("Please Enter in valid Integer format : ");
+                sc.next();
+            }
+        }
+
+        return choice;
     }
 }
 
@@ -110,82 +127,33 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException{
-        Scanner sc = new Scanner(System.in);
-
-        Boolean looping = true;
-
+        
         Employee employees[] = new Employee[1000];
 
         InputStreamReader r=new InputStreamReader(System.in);    
         BufferedReader br=new BufferedReader(r);
+        
+        Boolean looping = true;
 
         while(looping){
-            int num;
-            try{
-                System.out.print("1) Create \n2) Display \n3) Raise Salary \n4) Remove \n5) Exit \nPick one number of the following : ");
-                num = sc.nextInt();
-            }
-            catch(Exception e){
-                System.out.println("Please Enter a valid Input format!");
-                System.out.println("-----------------------------------------------------------------------");
-                sc.nextLine();
-                continue;
-            }
+            System.out.print("1) Create \n2) Display \n3) Raise Salary \n4) Remove \n5) Exit \nPick one number of the following : ");
+            int num = Menu.readChoice(1, 5);
 
             if(num == 1){
                 boolean subloop = true;
 
                 while(subloop){
-                    int num2;
-                    try{
-                        System.out.print("\n1) Clerk \n2) Programmer \n3) Manager \n4) Exit \nPick one number of the following : ");
-                        num2 = sc.nextInt();
-
-                        if(num2<1 || num2>4)
-                            throw new ChoiceException("Please enter a valid choice (1, 2, 3, 4)");
-                    }
-                    catch(ChoiceException e){
-                        System.out.println(e.getMessage());
-                        sc.nextLine();
-                        System.out.println("-----------------------------------------------------------------------");
-                        continue;
-                    }
-                    catch(Exception e){
-                        System.out.println("Please enter a valid format!");
-                        sc.nextLine();
-                        System.out.println("-----------------------------------------------------------------------");
-                        continue;
-                    }
+                    System.out.print("\n1) Clerk \n2) Programmer \n3) Manager \n4) Exit \nPick one number of the following : ");
+                    int num2 = Menu.readChoice(1, 4);
+                    
 
                     if(num2 == 4){
                         subloop = false;
                         break;
                     }
 
-                    int id;
-
-                    while(true){
-                        try{
-                            System.out.print("Enter the id of the employee : ");
-                            id = sc.nextInt();
-
-                            if(id<0 || id>=100)
-                                throw new IdException("Please Enter id between 0-99!");
-
-                            break;
-                        }
-                        catch(IdException e){
-                            System.out.println(e.getMessage());
-                            sc.nextLine();
-                            continue;
-                        }
-                        catch(Exception e){
-                            System.out.println("Please Enter id in integer format!");
-                            sc.nextLine();
-                            continue;
-                        }
-                    }
-
+                    System.out.print("Enter the id of the employee : ");
+                    int id = Menu.readChoice(0, 99);
 
                     if(idExists(employees, id) != -1){
                         System.out.println("The id you entered already exists!");
@@ -196,27 +164,9 @@ public class Main {
                     System.out.print("Enter the name of Employee : ");
                     String name= br.readLine(); 
 
-                    int age;
+                    System.out.print("Enter the age of Employee : ");
+                    int age = Menu.readChoice(21, 60);
 
-                    while(true){
-                        try{
-                            System.out.print("Enter the age of Employee : ");
-                            age = sc.nextInt();
-    
-                            if(age<21 || age>60)
-                                throw new AgeException("Please Enter age between 21-60!");
-
-                            break;
-                        }
-                        catch(AgeException e){
-                            System.out.println(e.getMessage());
-                        }
-                        catch(Exception e){
-                            System.out.println("Please Enter age in valid format!");
-                            sc.nextLine();
-                            continue;
-                        }
-                    }
 
                     if(num2 == 1){
                         Employee c = new Clerk(name, age, Designation.CLERK, id);
@@ -250,21 +200,9 @@ public class Main {
                 }
             }
             else if(num == 4){
-                int removeId = 0;
+                System.out.print("Enter the id of the employee you want to remove : ");
+                int removeId = Menu.readChoice(0, 99);
 
-                do{
-                    try{
-                        System.out.print("Enter the id of the employee you want to remove : ");
-                        removeId = sc.nextInt();
-                        if(removeId<0 || removeId>=100)
-                            throw new IdException("Id should be between 0-99");
-                    }
-                    catch(IdException e){
-                        System.out.println(e.getMessage());
-                        continue;
-                    }
-                }while(removeId<0 || removeId>=100);
-                
                 int temp = idExists(employees, removeId);
 
                 if(temp == -1){
@@ -288,8 +226,6 @@ public class Main {
             }
             System.out.println("-----------------------------------------------------------------------");
         }
-
-        sc.close();
     }
     
 }

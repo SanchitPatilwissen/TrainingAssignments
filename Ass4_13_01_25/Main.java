@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.*;;
 
 enum Designation{
     CLERK,
@@ -35,7 +36,7 @@ abstract class Employee{
     final void display() {
         System.out.println("\n");
         System.out.println("The following are the details of this Employee : \nName : " + this.name + "\nAge : " + this.age + "\nSalary : " + this.salary + "\nDesignation : "+this.designation);
-        System.out.println("\n\n");
+        System.out.println("\n");
     }
  
     abstract void raiseSalary();
@@ -86,6 +87,15 @@ class ChoiceException extends RuntimeException{
     }
 }
 
+class NameException extends RuntimeException{
+    NameException(){
+        super();
+    }
+    NameException(String s){
+        super(s);
+    }
+}
+
 class Menu{
     private static int lower;
     private static int upper;
@@ -116,6 +126,35 @@ class Menu{
 
         return choice;
     }
+
+    static String validateName(){
+        InputStreamReader r=new InputStreamReader(System.in);    
+        BufferedReader br=new BufferedReader(r);
+
+        String name;
+        String regex_exp = "^[A-Z][a-z]* [A-Z][a-z]*$";
+
+        while(true){
+            try{
+                name= br.readLine();
+                Pattern p1 = Pattern.compile(regex_exp);
+                Matcher m1 = p1.matcher(name);
+
+                if(m1.matches())
+                    break;
+                else
+                    throw new NameException("Please Enter the name in valid Format(1st letters caps, 2 words consisting of letters only) : ");
+            }
+            catch(NameException e){
+                System.out.print(e.getMessage());
+            }
+            catch(Exception e){
+                System.out.print("Please enter in valid format : ");
+            }
+        }
+
+        return name;
+    }
 }
 
 public class Main {
@@ -127,11 +166,11 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException{
-        
-        Employee employees[] = new Employee[1000];
 
         InputStreamReader r=new InputStreamReader(System.in);    
         BufferedReader br=new BufferedReader(r);
+        
+        Employee employees[] = new Employee[1000];
         
         Boolean looping = true;
 
@@ -162,7 +201,7 @@ public class Main {
                     }
 
                     System.out.print("Enter the name of Employee : ");
-                    String name= br.readLine(); 
+                    String name= Menu.validateName(); 
 
                     System.out.print("Enter the age of Employee : ");
                     int age = Menu.readChoice(21, 60);

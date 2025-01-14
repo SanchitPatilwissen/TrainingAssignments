@@ -1,4 +1,4 @@
-import emp.*;
+import emp.Main;
 
 public class MainProg {
     public static void main(String[] args) {

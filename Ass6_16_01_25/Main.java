@@ -273,10 +273,10 @@ public class Main {
                         else if(num2 == 4){
                             c = Ceo.createCeo(name, age, Designation.CEO, id);
                         }
-                        System.out.println("here...");
+                        System.out.println("CEO is created");
                         employees[id] = c;
                     }catch(Exception e){
-                        System.err.println("from main..");
+                        System.err.println("There must be a CEO present before creating other employees");
                     }
 
                     System.out.println("-----------------------------------------------------------------------");
@@ -284,12 +284,16 @@ public class Main {
                 }
             }
             else if(num == 2){
+                int count = 0;
                 for(int i=0;i<employees.length;i++){
                     if(employees[i] != null){
                         System.out.println("Employee "+i);
                         employees[i].display();
+                        count++;
                     }
                 }
+                if(count==0)
+                    System.out.println("No Employees to Display");
             }
             else if(num == 3){
                 for(int i=0;i<employees.length;i++){

@@ -11,10 +11,16 @@ class MultipleObjectException extends RuntimeException{
 class A{
     static private A p1 = null; // Object is already created.
 
-    A(){
-        if(p1 != null){
-
+    A() throws MultipleObjectException{
+        if(this instanceof B && this instanceof A){
+            System.out.println("Instance of B Created !");
         }
+        else if(p1 == null){
+            p1 = this;
+            System.out.println("A instance is created!");
+        }
+        else
+            throw new MultipleObjectException("1 object can be created!");
     }
 
     public static A getA(){
@@ -35,13 +41,13 @@ class A{
 }
 
 final class B extends A{
-    static private A p1 = null; // Object is already created.
+    static private B p1 = null; // Object is already created.
 
     private B(){
         
     }
 
-    public static A getB(){
+    public static B getB(){
         try{
             if(p1==null){
                 p1 = new B();
@@ -61,10 +67,17 @@ final class B extends A{
 
 public class Main {
     public static void main(String[] args) {
+        A p = new A();
+        A p2 = new A();
+
+        B p3 = B.getB();
+
         A p1 = A.getA();
-        A p2 = A.getA();
 
         System.out.println(p1);
+        System.out.println(p3);
+        System.out.println(p);
         System.out.println(p2);
+
     }    
 }

@@ -1,12 +1,11 @@
 package emp;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.regex.*;;
+import java.util.Scanner;
+import java.util.regex.*;
+;
 
 enum Designation{
     CLERK,
@@ -44,9 +43,7 @@ abstract class Employee{
     }
  
     final void display() {
-        System.out.println("\n");
         System.out.println("The following are the details of this Employee : \nName : " + this.name + "\nAge : " + this.age + "\nSalary : " + this.salary + "\nDesignation : "+this.designation);
-        System.out.println("\n");
     }
  
     abstract void raiseSalary();
@@ -177,7 +174,6 @@ class Menu{
                 sc.next();
             }
         }
-
         return choice;
     }
 
@@ -206,13 +202,11 @@ class Menu{
                 System.out.print("Please enter in valid format : ");
             }
         }
-
         return name;
     }
 }
 
 public class Main {
-
     static int idExists(Employee[] employees, int id){
         if(employees[id] == null)
             return -1;
@@ -229,6 +223,7 @@ public class Main {
         Boolean looping = true;
 
         while(looping){
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.print("1) Create \n2) Display \n3) Raise Salary \n4) Remove \n5) Exit \nPick one number of the following : ");
             int num = Menu.readChoice(1, 5);
 
@@ -236,7 +231,8 @@ public class Main {
                 boolean subloop = true;
 
                 while(subloop){
-                    System.out.print("\n1) Clerk \n2) Programmer \n3) Manager \n4) CEO \n5) Exit \nPick one number of the following : ");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.print("1) Clerk \n2) Programmer \n3) Manager \n4) CEO \n5) Exit \nPick one number of the following : ");
                     int num2 = Menu.readChoice(1, 5);
                     
 
@@ -272,21 +268,19 @@ public class Main {
                         }
                         else if(num2 == 4){
                             c = Ceo.createCeo(name, age, Designation.CEO, id);
+                            System.out.println("CEO is created");
                         }
-                        System.out.println("CEO is created");
                         employees[id] = c;
                     }catch(Exception e){
                         System.err.println("There must be a CEO present before creating other employees");
                     }
-
-                    System.out.println("-----------------------------------------------------------------------");
-
                 }
             }
             else if(num == 2){
                 int count = 0;
                 for(int i=0;i<employees.length;i++){
                     if(employees[i] != null){
+                        System.out.println("-----------------------------------------------------------------");
                         System.out.println("Employee "+i);
                         employees[i].display();
                         count++;
@@ -312,7 +306,9 @@ public class Main {
                     System.out.println("The Employee ID you entered doesn't exist!");
                 }
                 else{
+                    System.out.println("-----------------------------------------------------------------");
                     employees[temp].display();
+                    System.out.println("-----------------------------------------------------------------");
                     System.out.print("Do you realy want to remove this employee : ");
                     String response = br.readLine();
                     if(response.charAt(0) == 'Y' || response.charAt(0) == 'y'){
@@ -327,8 +323,11 @@ public class Main {
             else{
                 System.out.println("Please enter a valid number (1-5)!");
             }
-            System.out.println("-----------------------------------------------------------------------");
         }
     }
-    
 }
+
+
+// 1) AbstractFactory for employee creation
+// 2) Template CEO and then the rest
+// 3) Iterator implementation

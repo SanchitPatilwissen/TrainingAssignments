@@ -13,6 +13,8 @@ public class Race extends Thread{
         while(true){
             try{
                 Arrays.sort(bikers, Comparator.comparingInt((Biker biker) -> biker.getFinishTime()).thenComparing(biker -> biker.getDistance()));       // Secondary sort by name
+                System.out.println("\033\143");
+                
                 System.out.println("---------------------------------------------------------------------");
                 System.out.println("Time : "+cnt+"s");
                 int i = 1;
@@ -32,6 +34,7 @@ public class Race extends Thread{
 
     static public void finalDisplay(){
         Arrays.sort(bikers, Comparator.comparingInt((Biker biker) -> biker.getFinishTime()).thenComparing(biker -> biker.getDistance()));       // Secondary sort by name
+        System.out.println("\033\143");
         System.out.println("---------------------------------------------------------------------");
         System.out.println("Final Results");
         int i = 1;
@@ -70,6 +73,9 @@ public class Race extends Thread{
             biker.start();
         }
 
+        synchronized (Biker.lock) {
+            Biker.lock.notifyAll();
+        }
         for(var biker : bikers)
             biker.join();
 

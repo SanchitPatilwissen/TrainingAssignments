@@ -1,12 +1,19 @@
 package Components;
 
 import Components.Verification.Menu;
+
+import java.time.LocalTime;
 import java.util.Random;
 
 public final class Biker extends Thread{
+    public static final Object lock = new Object();
     private static int count = 0;
 
     private String name;
+
+    private LocalTime startTime;
+    private LocalTime endingTime;
+
     private int endTime;
     private int distanceLeft;
     private int speed = 0;
@@ -29,20 +36,22 @@ public final class Biker extends Thread{
     private void accelerate(int val){
         if(speed+val<=0)
             speed = 0;
+        else if(speed+val>80)
+            speed = 80;
         else
             speed += val;
     }
 
     public void display(){
-        if(this.isAlive()){
-            int percent = (int)((distanceLeft/distance)*100);
-            System.out.print(percent);
+        if(this.isAlive() && distanceLeft>0){
+            System.out.print("    ");
+            int percent = (int)(((double)distanceLeft/distance)*100);
             for(int i=0;i<percent;i++)
                 System.out.print('|');
             System.out.println("\nName : "+name+", Distance Left : "+distanceLeft+" meters"+", Speed : "+speed+"m/s");
         }
         else
-            System.out.println("Name : "+name+", End Time : "+endTime+"s");
+            System.out.println("Name : "+name+", Overall Time : "+endTime+"s"+", Starting Time : "+startTime+", Ending Time : "+endingTime);
     }
 
     public int getDistance(){
@@ -53,20 +62,39 @@ public final class Biker extends Thread{
         return endTime;
     }
 
+    public static void startRace() {
+        
+    }
+
     public void run(){
+        synchronized (lock) {
+            System.out.println(name+" IS WAITING");
+            try {
+               lock.wait();
+            }
+            catch (Exception e) {
+                System.out.println(name + " interrupted while waiting to start the race.");
+            }
+        }
+        System.out.println(name+" has started");
         Random random = new Random();
         
+        startTime = LocalTime.now();
+
         while(distanceLeft>0){
             try{
                 int randomNumber = random.nextInt(16) - 5;
                 accelerate(randomNumber);
                 distanceLeft -= speed;
                 Thread.sleep(1000);
-                endTime++;
+                if(distanceLeft>0)
+                    endTime++;
             }
             catch(Exception e){
                 System.out.println("Exception occured!");
             }
         }
+
+        endingTime = LocalTime.now();
     }
 }

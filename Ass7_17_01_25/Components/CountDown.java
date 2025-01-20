@@ -13,7 +13,6 @@ public final class CountDown{
             Thread.sleep(1000);
         }
         System.out.println("Start!");
-        System.out.println("\n------------------------------------------------------------------------------------------\n");
     }
 }
 

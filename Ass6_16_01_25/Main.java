@@ -3,6 +3,8 @@ package emp;
 import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.*;
 ;
@@ -207,25 +209,20 @@ class Menu{
 }
 
 public class Main {
-    static int idExists(Employee[] employees, int id){
-        if(employees[id] == null)
-            return -1;
-        return id;
-    }
-
     public static void main(String[] args) throws IOException{
 
         InputStreamReader r=new InputStreamReader(System.in);    
         BufferedReader br=new BufferedReader(r);
         
-        Employee employees[] = new Employee[1000];
+        // Employee employees[] = new Employee[1000];
+        HashMap employees = new HashMap<>();
         
         Boolean looping = true;
 
         while(looping){
             System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.print("1) Create \n2) Display \n3) Raise Salary \n4) Remove \n5) Exit \nPick one number of the following : ");
-            int num = Menu.readChoice(1, 5);
+            System.out.print("1) Create \n2) Display \n3) Raise Salary \n4) Remove \n5) Search \n6) Exit \nPick one number of the following : ");
+            int num = Menu.readChoice(1, 6);
 
             if(num == 1){
                 boolean subloop = true;
@@ -241,9 +238,9 @@ public class Main {
                         break;
                     }
                     System.out.print("Enter the id of the employee : ");
-                    int id = Menu.readChoice(0, 99);
+                    int id = Menu.readChoice(0, 10000000);
 
-                    if(idExists(employees, id) != -1){
+                    if(employees.get(id)!=null){
                         System.out.println("The id you entered already exists!");
                         System.out.println("-----------------------------------------------------------------------");
                         continue;
@@ -270,7 +267,7 @@ public class Main {
                             c = Ceo.createCeo(name, age, Designation.CEO, id);
                             System.out.println("CEO is created");
                         }
-                        employees[id] = c;
+                        employees.put(id, c);
                     }catch(Exception e){
                         System.err.println("There must be a CEO present before creating other employees");
                     }
@@ -278,11 +275,11 @@ public class Main {
             }
             else if(num == 2){
                 int count = 0;
-                for(int i=0;i<employees.length;i++){
-                    if(employees[i] != null){
+                for(var id : employees.keySet()){
+                    if(employees.get(id) != null){
                         System.out.println("-----------------------------------------------------------------");
-                        System.out.println("Employee "+i);
-                        employees[i].display();
+                        System.out.println("Employee "+id);
+                        ((Employee) employees.get(id)).display();
                         count++;
                     }
                 }
@@ -290,34 +287,41 @@ public class Main {
                     System.out.println("No Employees to Display");
             }
             else if(num == 3){
-                for(int i=0;i<employees.length;i++){
-                    if(employees[i] != null){
-                        employees[i].raiseSalary();
+                for(var id : employees.keySet()){
+                    if(employees.get(id) != null){
+                        ((Employee) employees.get(id)).raiseSalary();
                     }
                 }
             }
             else if(num == 4){
                 System.out.print("Enter the id of the employee you want to remove : ");
-                int removeId = Menu.readChoice(0, 99);
+                int removeId = Menu.readChoice(0, 10000000);
 
-                int temp = idExists(employees, removeId);
-
-                if(temp == -1){
+                if(employees.get(removeId)==null){
                     System.out.println("The Employee ID you entered doesn't exist!");
                 }
                 else{
                     System.out.println("-----------------------------------------------------------------");
-                    employees[temp].display();
-                    System.out.println("-----------------------------------------------------------------");
+                    ((Employee) employees.get(removeId)).display();
                     System.out.print("Do you realy want to remove this employee : ");
                     String response = br.readLine();
                     if(response.charAt(0) == 'Y' || response.charAt(0) == 'y'){
-                        employees[temp] = null;
+                        employees.remove(removeId);
                         System.out.println("The Employee is successfully removed!");
                     }
                 }
             }
             else if(num == 5){
+                System.out.print("Enter the ID of the employee you want to search : ");
+                int searchId = Menu.readChoice(0, 10000000);
+                if(employees.get(searchId)==null)
+                    System.out.println("No employee of this ID exists!");
+                else{
+                    System.out.println("-----------------------------------------------------------------");
+                    ((Employee) employees.get(searchId)).display();
+                }
+            }
+            else if(num == 6){
                 looping = false;
             }
             else{

@@ -3,9 +3,7 @@ package emp;
 import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.*;
 ;
 
@@ -215,7 +213,7 @@ public class Main {
         BufferedReader br=new BufferedReader(r);
         
         // Employee employees[] = new Employee[1000];
-        HashMap employees = new HashMap<>();
+        HashMap<Integer, Employee> employees = new HashMap<Integer, Employee>();
         
         Boolean looping = true;
 
@@ -275,13 +273,30 @@ public class Main {
             }
             else if(num == 2){
                 int count = 0;
+                System.out.print("On what basis do you want to sort the employees \n1) id \n2) Name \n3) Age \n4) Salary \n5) Designation \nChoose one of the above : ");
+                int sortingOrder = Menu.readChoice(1, 6);
+
+                TreeSet<Employee> sortedEmployees = null;
+
+                switch (sortingOrder) {
+                    case 1:
+                        sortedEmployees = new TreeSet<Employee>(new IDSorter());
+                        break;
+                
+                    case 2 :
+                        sortedEmployees = new TreeSet<Employee>(new NameSorter());
+                        break;
+                }
+
                 for(var id : employees.keySet()){
-                    if(employees.get(id) != null){
-                        System.out.println("-----------------------------------------------------------------");
-                        System.out.println("Employee "+id);
-                        ((Employee) employees.get(id)).display();
-                        count++;
-                    }
+                    sortedEmployees.add(employees.get(id));
+                }
+
+                for(var emp : sortedEmployees){
+                    System.out.println("-----------------------------------------------------------------");
+                    System.out.println("Employee "+emp.getId());
+                    emp.display();
+                    count++;
                 }
                 if(count==0)
                     System.out.println("No Employees to Display");
@@ -331,6 +346,17 @@ public class Main {
     }
 }
 
+class NameSorter implements Comparator<Employee>{
+    public int compare(Employee s1, Employee s2){
+        return s1.getName().compareTo(s2.getName());
+    }
+}
+
+class IDSorter implements Comparator<Employee>{
+    public int compare(Employee s1, Employee s2){
+        return new Integer(s1.getId()).compareTo(s2.getId());
+    }
+}
 
 // 1) AbstractFactory for employee creation
 // 2) Template CEO and then the rest

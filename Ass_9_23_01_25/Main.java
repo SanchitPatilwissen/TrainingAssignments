@@ -61,66 +61,78 @@ abstract class Employee {
     
         static void readAll() {
             try {
-                RandomAccessFile fr = new RandomAccessFile("employees.csv", "r");
-                String line = null;
-                while ((line = fr.readLine()) != null) {
-                    int id, age;
-                    String name;
-                    double salary;
-    
-                    String[] arr = line.split(",");
-    
-                    for(String s : arr) System.out.print(s+" ");
-                    System.out.println();
-    
-                    id = Integer.parseInt(arr[0]);
-                    name = arr[1];
-                    age = Integer.parseInt(arr[2]);
-                    salary = Double.parseDouble(arr[4]); 
-    
-                    Employee temp = null;
 
-                    if (arr[3].equals("CLERK")){
-                        temp = new Clerk(name, age, Designation.CLERK, id);
-                        temp.salary = salary;
-                        employees.put(id, temp);   
-                    }
-                    else if (arr[3].equals("PROGRAMMAR")){
-                        temp = new Programmer(name, age, Designation.PROGRAMMER, id);
-                        temp.salary = salary;
-                        employees.put(id, temp);
-                    }
-                    else if (arr[3].equals("MANAGER")){
-                        temp = new Manager(name, age, Designation.MANAGER, id);
-                        temp.salary = salary;
-                        employees.put(id, temp);
-                    }
-                    else if(arr[3].equals("CEO")){
-                        temp = Ceo.createCeo(name, age, Designation.CEO, id);
-                        temp.salary = salary;
-                        employees.put(id, temp);
-                    }
-                }
-                fr.close();
-            } catch (Exception e) {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("employees.ser"));
+                employees = (LinkedHashMap) ois.readObject();
+                // RandomAccessFile fr = new RandomAccessFile("employees.csv", "r");
+                // String line = null;
+                // while ((line = fr.readLine()) != null) {
+                //     int id, age;
+                //     String name;
+                //     double salary;
+    
+                //     String[] arr = line.split(",");
+    
+                //     for(String s : arr) System.out.print(s+" ");
+                //     System.out.println();
+    
+                //     id = Integer.parseInt(arr[0]);
+                //     name = arr[1];
+                //     age = Integer.parseInt(arr[2]);
+                //     salary = Double.parseDouble(arr[4]); 
+    
+                //     Employee temp = null;
+
+                //     if (arr[3].equals("CLERK")){
+                //         temp = new Clerk(name, age, Designation.CLERK, id);
+                //         temp.salary = salary;
+                //         employees.put(id, temp);   
+                //     }
+                //     else if (arr[3].equals("PROGRAMMAR")){
+                //         temp = new Programmer(name, age, Designation.PROGRAMMER, id);
+                //         temp.salary = salary;
+                //         employees.put(id, temp);
+                //     }
+                //     else if (arr[3].equals("MANAGER")){
+                //         temp = new Manager(name, age, Designation.MANAGER, id);
+                //         temp.salary = salary;
+                //         employees.put(id, temp);
+                //     }
+                //     else if(arr[3].equals("CEO")){
+                //         temp = Ceo.createCeo(name, age, Designation.CEO, id);
+                //         temp.salary = salary;
+                //         employees.put(id, temp);
+                //     }
+                // }
+                // fr.close();
+                ois.close();
+            }
+            catch(FileNotFoundException e){
+                System.out.println("No Employees to display!");
+            } 
+            catch (Exception e) {
                 System.out.println(e);
             }
         }
     
         static void appendAll() {
-            String st = "";
-            for (var id : employees.keySet()) {
-                st = st + id + "," + employees.get(id).getName() + "," + employees.get(id).getAge() + ","
-                + employees.get(id).getDesignation() + "," + employees.get(id).getSalary();
-                st = st + "\n";
-            }
+            // String st = "";
+            // for (var id : employees.keySet()) {
+            //     st = st + id + "," + employees.get(id).getName() + "," + employees.get(id).getAge() + ","
+            //     + employees.get(id).getDesignation() + "," + employees.get(id).getSalary();
+            //     st = st + "\n";
+            // }
             try {
-                PrintWriter pw = new PrintWriter(new FileOutputStream("employees.csv"));
-                pw.println(st);
-                pw.flush();
-                pw.close();
+                // PrintWriter pw = new PrintWriter(new FileOutputStream("employees.csv"));
+                // pw.println(st);
+                // pw.flush();
+                // pw.close();
+                LinkedHashMap<Integer, Employee> employees_copy = (LinkedHashMap<Integer, Employee>) employees.clone();
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("employees.ser"));
+                oos.writeObject(employees_copy);
+                oos.close();
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println("Not able to write to database!");
             }
         }
     

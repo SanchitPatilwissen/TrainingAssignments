@@ -1,0 +1,31 @@
+CREATE type MARITAL_STATUS_TYPE as enum('YES', 'NO');
+
+CREATE type DESIGNATION_TYPE as enum('PROGRAMMAR', 'TESTER', 'ADMIN', 'MANAGER');
+
+CREATE TABLE EMPLOYEE(
+	EID int primary key,
+	NAME varchar(20) NOT NULL,
+	AGE smallint NOT NULL check(AGE>20 and AGE<=60),
+	SALARY decimal(9, 2) DEFAULT 15000.00,
+	DESIGNATION DESIGNATION_TYPE NOT NULL,
+	MGR_ID int,
+	EMAIL_ID varchar(100) unique not null check(EMAIL_ID ~* '^[A-Za-z0-9]+@[A-Za-z]+.com$'),
+	MARITAL_STATUS MARITAL_STATUS_TYPE not null,
+	JOINING_DATE date default current_date,
+	CONSTRAINT fk_manager FOREIGN KEY (MGR_ID) REFERENCES EMPLOYEE(EID)
+);
+
+INSERT INTO EMPLOYEE (EID, NAME, AGE, SALARY, DESIGNATION, MGR_ID, EMAIL_ID, MARITAL_STATUS) VALUES (
+	99,
+	'Omkar Shirwadkar',
+	21,
+	100000,
+	'PROGRAMMAR',
+	23,
+	'OmkarShirwadkar@spit.com',
+	'NO'
+);
+
+UPDATE EMPLOYEE SET MGR_ID = NULL WHERE EID = 23;
+
+select * from EMPLOYEE;

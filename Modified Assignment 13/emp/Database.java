@@ -10,8 +10,10 @@ public class Database {
     
     static void initialize(){
         try{
-            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Employee_management", "postgres", "tiger");
-            stmt = con.createStatement();
+            if(con == null)
+                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/employee_management", "postgres", "tiger");
+            if(stmt == null)
+                stmt = con.createStatement();
 
         }
         catch(Exception e){
@@ -98,13 +100,13 @@ public class Database {
 
     static final void closing(){
         try{
-            rs.close();
-            stmt.close();
-            con.close();
-            pstm.close();
+            if(rs != null) rs.close();
+            if(stmt != null) stmt.close();
+            if(con != null) con.close();
+            if(pstm != null) pstm.close();
         }
         catch(Exception e){
-            // System.out.println(e);
+            System.out.println(e);
         }
     }
 }

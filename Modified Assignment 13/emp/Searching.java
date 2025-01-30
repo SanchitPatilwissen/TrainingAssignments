@@ -5,7 +5,7 @@ public class Searching<T> extends Database {
         try {
             String query;
             if(val.getClass() == String.class)
-                query = "select * from EMPLOYEE where " + parameter + " like '" + val + "%';";
+                query = "select * from EMPLOYEE where UPPER(" + parameter + ") like '" + val + "%';";
             else 
                 query = "select * from EMPLOYEE where " + parameter + " = " + val + ";";
             System.out.println(query);

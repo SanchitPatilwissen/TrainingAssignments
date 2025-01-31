@@ -8,8 +8,9 @@ public class Searching<T> extends Database {
                 query = "select * from EMPLOYEE where UPPER(" + parameter + ") like '" + val + "%';";
             else 
                 query = "select * from EMPLOYEE where " + parameter + " = " + val + ";";
-            System.out.println(query);
-            rs = stmt.executeQuery(query);
+            rs.setCommand(query);
+            // rs = stmt.executeQuery(query);
+            rs.execute();
             while (rs.next()) {
                 System.out.println("The following are the details of this Employee : \nID : " + rs.getString(1)
                         + " \nName : " + rs.getString(2) + "\nAge : "

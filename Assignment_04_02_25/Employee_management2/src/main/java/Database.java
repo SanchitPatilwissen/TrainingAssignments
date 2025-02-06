@@ -56,7 +56,7 @@ public class Database {
         		query = "select * from employees order by data->>'"+value+"';";
             rs = stmt.executeQuery(query);
             while(rs.next()){
-                System.out.println(rs.getObject("data"));
+                System.out.println("ID : "+rs.getString(1)+" "+rs.getObject("data"));
             }
 
         }
@@ -67,17 +67,28 @@ public class Database {
 
     static final void raiseSalary(int raise, int id) {
         try{
-        	
+        	String query = "update EMPLOYEES set data = esalary+"+raise+" where eid = "+id+";";
+            stmt.executeUpdate(query);
         }
         catch(Exception e){
             System.out.println(e);
         }
     }
 
-    static final long search(int id){
+    static final int search(int id){
         try{
-        	return 1;
-        	
+        	String query = "select * from employees where id = "+id+";";
+        	rs = stmt.executeQuery(query);
+            int count = 0;
+            System.out.println("The following are the details of this Employee : ");
+            while(rs.next()){
+                System.out.println("ID : "+rs.getString(1)+" "+rs.getObject("data"));
+                count++;
+            }
+            if(count==0){
+                System.out.println("The entered ID doesn't exist!");
+            }
+            return count;
         }
         catch(Exception e){
             System.out.println(e);
@@ -87,7 +98,8 @@ public class Database {
 
     static final void remove(int id){
         try{
-        	
+        	String query = "DELETE FROM EMPLOYEES WHERE id = "+id+";";
+            stmt.executeUpdate(query);
         }
         catch(Exception e){
             System.out.println(e);

@@ -2,11 +2,13 @@ package Components;
 
 import Components.Verification.Menu;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 public final class Biker extends Thread{
-    public static final Object lock = new Object();
+    private CountDownLatch latch;
     private static int count = 0;
 
     private String name;
@@ -14,22 +16,23 @@ public final class Biker extends Thread{
     private LocalTime startTime;
     private LocalTime endingTime;
 
-    private int endTime;
+    private int currentTime;
     private int distanceLeft;
     private int speed = 0;
     public static int distance;
 
-    private Biker(String name, int dist){
+    private Biker(String name, int dist, CountDownLatch latch){
         this.name = name;
         this.distanceLeft = dist;
+        this.latch = latch;
         count++;
     }
 
 
-    public static final Biker getBiker(int dist){
+    public static final Biker getBiker(int dist, CountDownLatch latch){
         System.out.print("Enter the name of Biker "+(count+1)+" : ");
         String name= Menu.validateName();
-        return new Biker(name, dist);
+        return new Biker(name, dist, latch);
 
     }
 
@@ -51,7 +54,7 @@ public final class Biker extends Thread{
             System.out.println("\nName : "+name+", Distance Left : "+distanceLeft+" meters"+", Speed : "+speed+"m/s");
         }
         else
-            System.out.println("Name : "+name+", Overall Time : "+endTime+"s"+", Starting Time : "+startTime+", Ending Time : "+endingTime);
+            System.out.println("Name : "+name+", Overall Time : "+currentTime+"s"+", Starting Time : "+startTime+", Ending Time : "+endingTime);
     }
 
     public int getDistance(){
@@ -59,27 +62,15 @@ public final class Biker extends Thread{
     }
 
     public int getFinishTime(){
-        return endTime;
-    }
-
-    public static void startRace() {
-        
+        return currentTime;
     }
 
     public void run(){
-        synchronized (lock) {
-            System.out.println(name+" IS WAITING");
-            try {
-               lock.wait();
-            }
-            catch (Exception e) {
-                System.out.println(name + " interrupted while waiting to start the race.");
-            }
-        }
         System.out.println(name+" has started");
         Random random = new Random();
         
         startTime = LocalTime.now();
+        latch.countDown();
 
         while(distanceLeft>0){
             try{
@@ -88,7 +79,7 @@ public final class Biker extends Thread{
                 distanceLeft -= speed;
                 Thread.sleep(1000);
                 if(distanceLeft>0)
-                    endTime++;
+                    currentTime++;
             }
             catch(Exception e){
                 System.out.println("Exception occured!");

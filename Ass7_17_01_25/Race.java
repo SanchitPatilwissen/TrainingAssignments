@@ -1,3 +1,4 @@
+import java.util.concurrent.*; 
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -55,11 +56,14 @@ public class Race extends Thread{
         System.out.print("Enter the number of bikers : ");
         numberOfBikers = Menu.readChoice(2, 20);
         
+
         Race.bikers = new Biker[numberOfBikers];
+        CountDownLatch latch = new CountDownLatch(numberOfBikers); 
         
         for(int i=0;i<numberOfBikers;i++){
-            bikers[i] = Biker.getBiker(distance);
+            bikers[i] = Biker.getBiker(distance, latch);
         }
+
 
         Race obj = new Race();
 
@@ -73,9 +77,8 @@ public class Race extends Thread{
             biker.start();
         }
 
-        synchronized (Biker.lock) {
-            Biker.lock.notifyAll();
-        }
+        latch.await();
+
         for(var biker : bikers)
             biker.join();
 

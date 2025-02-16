@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgreSQL_container
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tiger
+      POSTGRES_DB: employee_management
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port
+    networks:
+      - my_network
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  java-app:
+    build: ./java-app
+    container_name: my_java_app
+    depends_on:
+      - postgres
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge

@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>
-			Login Page
+			SignUp Page
 		</title>
 		<script>
 			function validatePasswords() {
@@ -19,7 +19,7 @@
 	</head>
 	<body>
 		<h2>Please Signup</h2>
-		<form action="insertDetails" onsubmit="return validatePasswords()">
+		<form action="insertDetails" method="POST" onsubmit="return validatePasswords()">
 			Customer ID: <input type="text" name="id"><br>
 			Name: <input type="text" name="name"><br>
 			Password: <input type="password" name="pwd"><br>

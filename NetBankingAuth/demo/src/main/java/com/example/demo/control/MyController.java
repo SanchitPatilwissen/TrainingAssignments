@@ -28,14 +28,15 @@ public class MyController {
 	}
 	
 	@RequestMapping("/insertDetails")
-	public ModelAndView setDetails(String id, String name, String pwd) {
+	public ModelAndView setDetails(Customer c) {
 		ModelAndView mv = new ModelAndView();
-		
-		if(!Database.isIdPresent(id)) {
-			Database.createCustomer(id, name, pwd);
-			mv.addObject("uname", name);
+		System.out.println(c);
+		if(!Database.isIdPresent(c.getId())) {
+			Database.createCustomer(c.getId(), c.getName(), c.getPwd());
+			mv.addObject("uname", c.getName());
 			mv.setViewName("welcome.jsp");
 		}else {
+			mv.addObject("error", "User with same Id already exists");
 			mv.setViewName("failure.jsp");
 		}
 		return mv;
@@ -51,6 +52,7 @@ public class MyController {
 			mv.setViewName("welcome.jsp");
 		}
 		else {
+			mv.addObject("error", "Invalid Credentials Entered!");
 			mv.setViewName("failure.jsp");
 		}
 		return mv;

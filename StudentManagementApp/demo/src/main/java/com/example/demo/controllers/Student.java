@@ -1,20 +1,30 @@
 package com.example.demo.controllers;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Student {
+	@Id
+	private int univRegNo;
 	private int rollno;
 	private String name;
+
 	private int std;
 	private String school;
 	private double percentage;
-	
-	public Student(int rollno, String name, int std, String school, double percentage) {
-		this.rollno = rollno;
-		this.name = name;
-		this.std = std;
-		this.school = school;
-		this.percentage = percentage;
-	}
 
+	static Student getStudent(int univRegNo, int rollno, String name, String school, int std, double percentage) {
+		Student stu = new Student();
+		stu.univRegNo = univRegNo;
+		stu.rollno = rollno;
+		stu.name = name;
+		stu.std = std;
+		stu.school = school;
+		stu.percentage = percentage;
+		return stu;
+	}
+	
 	public int getRollno() {
 		return rollno;
 	}
@@ -53,6 +63,14 @@ public class Student {
 
 	public void setPercentage(double percentage) {
 		this.percentage = percentage;
+	}
+
+	public int getUnivRegNo() {
+		return univRegNo;
+	}
+
+	public void setUnivRegNo(int univRegNo) {
+		this.univRegNo = univRegNo;
 	}
 	
 	

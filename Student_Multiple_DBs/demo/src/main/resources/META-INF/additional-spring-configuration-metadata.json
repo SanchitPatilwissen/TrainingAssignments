@@ -1,0 +1,67 @@
+{"properties": [
+  {
+    "name": "spring.datasource.drive-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.drive-class-name'"
+  },
+  {
+    "name": "spring.datasource.primary.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.primary.url'"
+  },
+  {
+    "name": "spring.datasource.primary.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.primary.username'"
+  },
+  {
+    "name": "spring.first.datasource.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.first.datasource.url'"
+  },
+  {
+    "name": "spring.first.datasource.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.first.datasource.username'"
+  },
+  {
+    "name": "spring.first.datasource.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.first.datasource.driver-class-name'"
+  },
+  {
+    "name": "spring.first.datasource.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.first.datasource.password'"
+  },
+  {
+    "name": "spring.first.jpa.hibernate.ddl-auto",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.first.jpa.hibernate.ddl-auto'"
+  },
+  {
+    "name": "spring.second.datasource.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second.datasource.url'"
+  },
+  {
+    "name": "spring.second.datasource.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second.datasource.username'"
+  },
+  {
+    "name": "spring.second.datasource.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second.datasource.password'"
+  },
+  {
+    "name": "spring.second.datasource.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second.datasource.driver-class-name'"
+  },
+  {
+    "name": "spring.second.jpa.hibernate.ddl-auto",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second.jpa.hibernate.ddl-auto'"
+  }
+]}

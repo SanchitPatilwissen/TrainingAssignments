@@ -3,6 +3,7 @@ package implementation;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Menu {
     private static int lower;
@@ -62,12 +63,32 @@ public class Menu {
 
     static String validateName() {
         String name;
-        String regex_exp = "^[A-Z][a-z]*$";
 
         while (true) {
             try {
                 name = br.readLine();
                 break;
+            } catch (NameException e) {
+                System.out.print(e.getMessage());
+            } catch (Exception e) {
+                System.out.print("Please enter in valid format : ");
+            }
+        }
+        return name;
+    }
+
+    static String validateCompany(Set<String> companies) {
+        String name;
+
+        while (true) {
+            try {
+                name = br.readLine();
+                if(companies.contains(name)){
+                    break;
+                }
+                else{
+                    System.out.println("Please type the correct company : ");
+                }
             } catch (NameException e) {
                 System.out.print(e.getMessage());
             } catch (Exception e) {

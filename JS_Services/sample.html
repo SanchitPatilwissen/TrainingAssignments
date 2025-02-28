@@ -1,0 +1,35 @@
+<form class="login-form">
+    <div class="form-group">
+        <label for="netbanking-id">Applicant's Full name</label>
+        <input type="text" id="full-name" name="full-name" required>
+    </div>
+    <div class="form-group">
+        <label for="loan-type">Type of Loan</label>
+        <select id="loan-type" name="loan-type" required>
+            <option value="home">Home Loan</option>
+            <option value="car">Auto Loan</option>
+            <option value="personal">Personal Loan</option>
+        </select>
+    </div>    
+    <div class="form-group, hidden">
+        <label for="password">Interest</label>
+        <span></span>
+    </div>
+    <div class="form-group, hidden">
+        <label for="loan-type">Tenure</label>
+        <select id="loan-type" name="loan-type" required>
+            <option value="" disabled selected>Select a Loan Type</option>
+            <option value="home">Home Loan</option>
+            <option value="car">Auto Loan</option>
+            <option value="personal">Personal Loan</option>
+        </select>
+    </div>
+    <div class="form-group, hidden">
+        <label for="netbanking-id">Amount</label>
+        <input type="number" id="amount" name="amount" min="18" max="100" required>
+    </div>
+    
+    <div class="form-group">
+        <button type="submit">calculate</button>
+    </div>
+</form>

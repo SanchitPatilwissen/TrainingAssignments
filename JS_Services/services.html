@@ -40,10 +40,50 @@
         <div class="service-item">
           <h3 class="dropdown-btn" id="loan-click">Loan</h3>
           <div class="dropdown-content" id="loan">
-            <p>We offer a range of loan products designed to meet your personal financial needs, including home loans,
-              auto loans, and more.</p>
-            <p>Whether you're planning for a major purchase or need some extra cash, our loans are flexible to suit your
-              requirements.</p>
+            <div id="para">
+              <p>We offer a range of loan products designed to meet your personal financial needs, including home loans,
+                auto loans, and more.</p>
+              <p>Whether you're planning for a major purchase or need some extra cash, our loans are flexible to suit
+                your
+                requirements.</p>
+            </div>
+            <div id="form-content">
+              <form class="login-form" name="login-form">
+                <div class="form-group">
+                  <label for="netbanking-id">Applicant's Full name</label>
+                  <input type="text" id="full-name" name="full-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="loan-type">Type of Loan</label>
+                  <select id="loan-type" class="type-of-loan" name="loan-type" required>
+                    <option value="" disabled selected>Select a Loan Type</option>
+                    <option value="home">Home Loan</option>
+                    <option value="car">Car Loan</option>
+                    <option value="personal">Personal Loan</option>
+                  </select>
+                </div>
+                <div class="form-group hidden">
+                  <label for="password">Interest</label>
+                  <span id="rate-of-interest"></span>
+                </div>
+                <div class="form-group hidden">
+                  <label for="loan-type">Tenure (in years)</label>
+                  <input type="number" id="tenure" name="tenure" min="1" max="30" placeholder="" required>
+                </div>
+                <div class="form-group hidden">
+                  <label for="netbanking-id">Amount</label>
+                  <input type="number" id="amount" name="amount" min="18" max="10000000" required>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit">calculate</button>
+                </div>
+              </form>
+              <div class="form-group" id="emi-display">
+                <label for="emi">EMI</label>
+                <span id="emi"></span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -51,9 +91,35 @@
         <div class="service-item">
           <h3 class="dropdown-btn" id="deposit-click">Deposit</h3>
           <div class="dropdown-content" id="deposit">
-            <p>Our deposit services provide a variety of solutions to help you grow your savings, from high-interest
-              savings accounts to specialized deposit plans.</p>
-            <p>We offer secure and reliable options to suit your long-term and short-term financial goals.</p>
+            <div id="para-deposit">
+              <p>Our deposit services provide a variety of solutions to help you grow your savings, from high-interest
+                savings accounts to specialized deposit plans.</p>
+              <p>We offer secure and reliable options to suit your long-term and short-term financial goals.</p>
+            </div>
+            <div id="form-content-deposit">
+              <form class="login-form-deposit" name="login-form-deposit">
+                <div class="form-group">
+                  <label for="netbanking-id">Amount</label>
+                  <input type="number" id="amount" name="amount" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Interest</label>
+                  <span id="rate-of-interest-deposit">7%</span>
+                </div>
+                <div class="form-group">
+                  <label for="loan-type">Tenure (in years)</label>
+                  <input type="number" id="tenure" name="tenure" min="1" max="10" placeholder="Must be less than 10 years" required>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit">calculate</button>
+                </div>
+              </form>
+              <div class="form-group" id="maturity-display">
+                <label for="maturity">Maturity Amount</label>
+                <span id="maturity"></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

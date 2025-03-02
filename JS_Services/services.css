@@ -80,3 +80,27 @@ h2 {
 .hidden{
     display: none;
 }
+
+#form-content{
+    display: none;
+}
+
+#para-deposit{
+    display: block;
+}
+
+#form-content-deposit{
+    display: none;
+}
+
+#para{
+    display: block;
+}
+
+#emi-display{
+    display: none;
+}
+
+#maturity-display{
+    display: none;
+}

@@ -139,26 +139,49 @@ footer .social-links a:hover {
 }
 
 /* Main Content Styles */
-.main-content {
+#main-content {
     flex: 1;
     padding: 20px;
     text-align: center;
 }
 
-.main-content h2 {
+#main-content h2 {
     font-size: 32px;
     margin-bottom: 20px;
 }
 
-.main-content p {
+#main-content p {
     font-size: 18px;
 }
 
-/* Image Styles */
-.main-content img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table Header */
+thead {
+    background: #333;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Table Rows */
+tr:nth-child(even) {
+    background: #f1f1f1;
+}
+
+tr:hover {
+    background: #ddd;
+    transition: 0.3s;
 }

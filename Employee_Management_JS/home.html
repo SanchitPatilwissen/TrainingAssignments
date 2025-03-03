@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Header</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="forms.css">
 </head>
 
-<body>
+<body onload="display()">
     <header>
         <div class="logo">
             <h1>EMP</h1>
@@ -21,18 +22,17 @@
         <div class="sidebar">
             <h3>Navigation</h3>
             <ul>
-                <li><a>Home</a></li>
-                <li><a>Add</a></li>
-                <li><a>Display</a></li>
-                <li><a>Search</a></li>
-                <li><a>Update</a></li>
-                <li><a>Remove</a></li>
+                <li><a id="add">Add</a></li>
+                <li><a id="display">Display</a></li>
+                <li><a id="search">Search</a></li>
+                <li><a id="update">Update</a></li>
+                <li><a id="remove">Remove</a></li>
             </ul>
         </div>
 
         <!-- Main Content Area -->
-        <div class="main-content">
-            <h2>WELCOME TO EMPLOYEE MANAGEMENT APP</h2>
+        <div id="main-content">
+            
         </div>
     </div>
 
@@ -45,6 +45,7 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 
 </html>

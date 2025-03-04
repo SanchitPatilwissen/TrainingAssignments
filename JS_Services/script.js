@@ -53,8 +53,8 @@ document.querySelector(".login-form-deposit").addEventListener("submit", functio
     event.preventDefault();
     var tenure_value = parseInt(document.forms["login-form-deposit"]["tenure"].value);
     var amt_value = parseInt(document.forms["login-form-deposit"]["amount"].value);
-    var r_value= 7;
-    var maturity_value = 34000;
+    var r_value= 0.07;
+    var maturity_value = amt_value*((1+r_value)**tenure_value);
     document.getElementById('maturity-display').style.display = "block";
     document.getElementById('maturity').innerText = "Rs. "+maturity_value;
 });

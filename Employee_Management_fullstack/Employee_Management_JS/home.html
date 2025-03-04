@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Header</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="forms.css">
 </head>
 
-<body>
+<body onload="display()">
     <header>
         <div class="logo">
             <h1>EMP</h1>
@@ -21,21 +22,17 @@
         <div class="sidebar">
             <h3>Navigation</h3>
             <ul>
-                <li><a href="/home.html">Home</a></li>
-                <li><a href="/add.html">Add</a></li>
-                <li><a href="/display.html">Display</a></li>
-                <li><a href="/search.html">Search</a></li>
-                <li><a href="/update.html">Update</a></li>
-                <li><a href="/remove.html">Remove</a></li>
+                <li><a id="add">Add</a></li>
+                <li><a id="display">Display</a></li>
+                <li><a id="search">Search</a></li>
+                <li><a id="update">Update</a></li>
+                <li><a id="remove">Remove</a></li>
             </ul>
         </div>
 
         <!-- Main Content Area -->
-        <div class="main-content">
-            <h2>Following are the employees present</h2>
-            <ol class="display_employees">
-                
-            </ol>
+        <div id="main-content">
+            
         </div>
     </div>
 
@@ -48,13 +45,7 @@
             </div>
         </div>
     </footer>
-    <script type="module">
-        import { display } from './script.js'; 
-        window.onload = function() {
-            display();
-        };
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

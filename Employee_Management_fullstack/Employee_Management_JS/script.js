@@ -13,7 +13,22 @@ class Employee {
     }
 }
 
-var employees = [];
+async function postData(employee) {
+    try {
+        const response = await fetch('http://localhost:8080/employees/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(employee),
+        });
+
+        console.log(response.status);
+
+    } catch (error) {
+        console.error('Error:', error); // Handle error
+    }
+}
 
 document.getElementById("add").addEventListener("click", function () {
     let text = `
@@ -54,25 +69,39 @@ document.getElementById("add").addEventListener("click", function () {
     document.getElementById("add-form").addEventListener("submit", formSubmit);
 });
 
-displayComponent.addEventListener("click", function () {
-    display();
-});
-
 function formSubmit(event) {
     event.preventDefault();
-    employees.push(new Employee(
+    postData(new Employee(
         document.forms["add-form"]["name"].value,
         parseInt(document.forms["add-form"]["age"].value),
         parseInt(document.forms["add-form"]["salary"].value),
         document.forms["add-form"]["designation"].value,
     )
     );
-    console.log(employees);
     document.forms["add-form"].reset();
     alert("Employee Added successfully");
 };
 
-function display() {
+displayComponent.addEventListener("click", function () {
+    display();
+});
+
+async function getData() {
+    try {
+        const response = await fetch('http://localhost:8080/employees');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        //console.log(data); // Handle the data
+        return data;
+    } catch (error) {
+        console.error('Error:', error); // Handle error
+        return null;
+    }
+}
+
+async function display() {
     let text = `
         <h2>EMPLOYEES</h2>
         <table>
@@ -87,10 +116,14 @@ function display() {
             </thead>
             <tbody>`;
 
+    const employees = await getData();
+
+    if (employees == null) return;
+
     for (var i = 0; i < employees.length; i++) {
         text += `
             <tr>
-                <td>${i + 1}</td>
+                <td>${employees[i].id}</td>
                 <td>${employees[i].name}</td>
                 <td>${employees[i].age}</td>
                 <td>${employees[i].salary}</td>
@@ -154,10 +187,10 @@ function searchEmployee(event) {
     text += `
             <tr>
                 <td>${id}</td>
-                <td>${employees[id-1].name}</td>
-                <td>${employees[id-1].age}</td>
-                <td>${employees[id-1].salary}</td>
-                <td>${employees[id-1].designation}</td>
+                <td>${employees[id - 1].name}</td>
+                <td>${employees[id - 1].age}</td>
+                <td>${employees[id - 1].salary}</td>
+                <td>${employees[id - 1].designation}</td>
             </tr>`;
 
     text += `</tbody></table>`;
@@ -165,7 +198,7 @@ function searchEmployee(event) {
     document.getElementById("main-content").innerHTML = text;
 }
 
-removeComponent.addEventListener('click', ()=>{
+removeComponent.addEventListener('click', () => {
     if (employees.length == 0) {
         let text = `
             <div class="login-container">
@@ -201,12 +234,12 @@ function removeEmployee(event) {
     event.preventDefault();
     let id = parseInt(document.forms["add-form"]["id"].value);
     var flag = confirm(`Do you really want to remove the employee with id ${id}?`);
-    if(flag)
-        employees.splice(id-1, 1);
+    if (flag)
+        employees.splice(id - 1, 1);
     document.forms["add-form"].reset();
 }
 
-updateComponent.addEventListener("click", ()=>{
+updateComponent.addEventListener("click", () => {
     if (employees.length == 0) {
         let text = `
             <div class="login-container">
@@ -276,19 +309,19 @@ function updateEmployee(event) {
 
     document.getElementById("main-content").innerHTML = text;
 
-    document.getElementById("add-form").addEventListener("submit", (event)=>{
+    document.getElementById("add-form").addEventListener("submit", (event) => {
         event.preventDefault();
-        if(document.forms["add-form"]["name"].value != ""){
-            employees[id-1].name = document.forms["add-form"]["name"].value;
+        if (document.forms["add-form"]["name"].value != "") {
+            employees[id - 1].name = document.forms["add-form"]["name"].value;
         }
-        if(document.forms["add-form"]["age"].value != ""){
-            employees[id-1].age = parseInt(document.forms["add-form"]["age"].value);
+        if (document.forms["add-form"]["age"].value != "") {
+            employees[id - 1].age = parseInt(document.forms["add-form"]["age"].value);
         }
-        if(document.forms["add-form"]["salary"].value != ""){
-            employees[id-1].salary = parseInt(document.forms["add-form"]["salary"].value);
+        if (document.forms["add-form"]["salary"].value != "") {
+            employees[id - 1].salary = parseInt(document.forms["add-form"]["salary"].value);
         }
-        if(document.forms["add-form"]["designation"].value){
-            employees[id-1].designation = document.forms["add-form"]["designation"].value;
+        if (document.forms["add-form"]["designation"].value) {
+            employees[id - 1].designation = document.forms["add-form"]["designation"].value;
         }
         console.log(employees);
         document.forms["add-form"].reset();

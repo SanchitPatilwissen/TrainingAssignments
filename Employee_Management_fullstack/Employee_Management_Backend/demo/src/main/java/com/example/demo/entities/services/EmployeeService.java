@@ -1,6 +1,7 @@
 package com.example.demo.entities.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,26 @@ public class EmployeeService {
 		return emp.findAll();
 	}
 	
+	public Optional<Employee> getEmployee(int id) {
+		return emp.findById(id);
+	}
+	
 	public String addEmployee(Employee employee) {
-		if(emp.existsById(employee.getId())) {
-			return "Sorry the Student you entered already exists! Please try again with different University registration number.";
-		}
 		emp.save(employee);
 		return "Student added successfully!";
+	}
+	
+	public String removeEmployee(int id) {
+		if(!emp.existsById(id)) {
+			return "Sorry the Student you entered doesn't exist! Please try again with different Id.";
+		}
+		else {
+			emp.deleteById(id);
+			return "Employee Deleted successfully";
+		}
+	}
+	
+	public long getEmployeeSize() {
+		return emp.count();
 	}
 }

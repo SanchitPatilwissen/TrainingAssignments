@@ -22,8 +22,10 @@ async function postData(employee) {
             },
             body: JSON.stringify(employee),
         });
-
+        response_text = await response.text();
+        console.log(response_text);
         console.log(response.status);
+        employees_size = employees_size+1;
 
     } catch (error) {
         console.error('Error:', error); // Handle error
@@ -82,6 +84,15 @@ function formSubmit(event) {
     alert("Employee Added successfully");
 };
 
+async function getCount() {
+    const response = await fetch('http://localhost:8080/employees/count');
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.text();
+    return parseInt(data);
+}
+
 displayComponent.addEventListener("click", function () {
     display();
 });
@@ -93,7 +104,6 @@ async function getData() {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        //console.log(data); // Handle the data
         return data;
     } catch (error) {
         console.error('Error:', error); // Handle error
@@ -102,6 +112,7 @@ async function getData() {
 }
 
 async function display() {
+    employees_size = await getCount();
     let text = `
         <h2>EMPLOYEES</h2>
         <table>
@@ -120,7 +131,7 @@ async function display() {
 
     if (employees == null) return;
 
-    for (var i = 0; i < employees.length; i++) {
+    for (var i = 0; i < employees_size; i++) {
         text += `
             <tr>
                 <td>${employees[i].id}</td>
@@ -137,7 +148,7 @@ async function display() {
 }
 
 searchComponent.addEventListener("click", function () {
-    if (employees.length == 0) {
+    if (employees_size == 0) {
         let text = `
             <div class="login-container">
                     <h2>Search Employee</h2>
@@ -153,7 +164,7 @@ searchComponent.addEventListener("click", function () {
                     <form class="add-form" name="add-form" id="add-form">
                         <div class="form-group">
                             <label for="Name">Enter ID</label>
-                            <input type="number" id="id" name="id" min="1" max="${employees.length}" placeholder="Value must be from 1 - ${employees.length}" required>
+                            <input type="number" id="id" name="id" required>
                         </div>
                         <div class="form-group">
                             <button type="submit">Search</button>
@@ -168,9 +179,28 @@ searchComponent.addEventListener("click", function () {
     }
 })
 
-function searchEmployee(event) {
+async function searchEntity(id) {
+    try {
+        const response = await fetch(`http://localhost:8080/employees/${id}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if(data==null) alert("No employee with that ID exists!")
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error:', error); // Handle error
+        return null;
+    }
+}
+
+async function searchEmployee(event) {
     event.preventDefault();
     let id = parseInt(document.forms["add-form"]["id"].value);
+    data = await searchEntity(id);
+    if(data === null) return;
+    
     let text = `
         <br><br>
         <table>
@@ -184,13 +214,14 @@ function searchEmployee(event) {
                 </tr>
             </thead>
             <tbody>`;
+
     text += `
             <tr>
-                <td>${id}</td>
-                <td>${employees[id - 1].name}</td>
-                <td>${employees[id - 1].age}</td>
-                <td>${employees[id - 1].salary}</td>
-                <td>${employees[id - 1].designation}</td>
+                <td>${data.id}</td>
+                <td>${data.name}</td>
+                <td>${data.age}</td>
+                <td>${data.salary}</td>
+                <td>${data.designation}</td>
             </tr>`;
 
     text += `</tbody></table>`;
@@ -198,8 +229,30 @@ function searchEmployee(event) {
     document.getElementById("main-content").innerHTML = text;
 }
 
+async function deleteEntity(id) {
+    try {
+        const response = await fetch(`http://localhost:8080/employees/delete/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            const data = await response.text(); 
+            console.log(data);  
+            alert(data);       
+            employees_size -= 1;
+        } else {
+            const errorData = await response.text();
+            alert(`Error: ${errorData.message || 'Failed to delete the entity.'}`);
+        }
+    } catch (error) {
+        // Catch and handle any errors in the request itself
+        console.error('Error:', error);
+        alert('An error occurred while deleting the entity!');
+    }
+}
+
 removeComponent.addEventListener('click', () => {
-    if (employees.length == 0) {
+    if (employees_size == 0) {
         let text = `
             <div class="login-container">
                     <h2>Remove Employee</h2>
@@ -215,7 +268,7 @@ removeComponent.addEventListener('click', () => {
                     <form class="add-form" name="add-form" id="add-form">
                         <div class="form-group">
                             <label for="Name">Enter ID</label>
-                            <input type="number" id="id" name="id" min="1" max="${employees.length}" placeholder="Value must be from 1 - ${employees.length}" required>
+                            <input type="number" id="id" name="id" required>
                         </div>
                         <div class="form-group">
                             <button type="submit">Search</button>
@@ -235,12 +288,12 @@ function removeEmployee(event) {
     let id = parseInt(document.forms["add-form"]["id"].value);
     var flag = confirm(`Do you really want to remove the employee with id ${id}?`);
     if (flag)
-        employees.splice(id - 1, 1);
+        deleteEntity(id);
     document.forms["add-form"].reset();
 }
 
 updateComponent.addEventListener("click", () => {
-    if (employees.length == 0) {
+    if (employees_size == 0) {
         let text = `
             <div class="login-container">
                     <h2>Update Employee</h2>
@@ -256,7 +309,7 @@ updateComponent.addEventListener("click", () => {
                     <form class="add-form" name="add-form" id="add-form">
                         <div class="form-group">
                             <label for="Name">Enter ID</label>
-                            <input type="number" id="id" name="id" min="1" max="${employees.length}" placeholder="Value must be from 1 - ${employees.length}" required>
+                            <input type="number" id="id" name="id" required>
                         </div>
                         <div class="form-group">
                             <button type="submit">Search</button>

@@ -1,0 +1,17 @@
+<h2>Login</h2>
+<form class="login-form" [formGroup]="LoginForm" (ngSubmit)="submitForm(LoginForm.value)">
+    <div class="form-group">
+        <label for="netbanking-id">Customer ID</label>
+        <input type="number" id="netbanking-id" formControlName="customerId" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" required>
+    </div>
+    <div class="form-group">
+        <button type="submit" [disabled]="LoginForm.invalid">Login</button>
+    </div>
+</form>
+<div>
+    <a (click)="st.toggleComponent()">SignUp</a> if account doesn't exist
+</div>

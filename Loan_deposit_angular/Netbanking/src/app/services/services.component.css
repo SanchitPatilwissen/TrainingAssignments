@@ -1,0 +1,71 @@
+.services-content {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.service-item {
+    margin-bottom: 20px;
+}
+
+/* Show the dropdown when the dropdown button is clicked */
+.service-item.active .dropdown-content {
+    display: block;
+}
+
+#loan-type {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+/* Style for focus state */
+#loan-type:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Style for the option elements */
+#loan-type option {
+    padding: 10px;
+    font-size: 1em;
+}
+
+/* Optional: Add some hover effects to improve UX */
+#loan-type:hover {
+    background-color: #f1f1f1;
+}
+
+.hidden{
+    display: none;
+}
+
+#form-content{
+    display: none;
+}
+
+#para-deposit{
+    display: block;
+}
+
+#form-content-deposit{
+    display: none;
+}
+
+#para{
+    display: block;
+}
+
+#emi-display{
+    display: none;
+}
+
+#maturity-display{
+    display: none;
+}

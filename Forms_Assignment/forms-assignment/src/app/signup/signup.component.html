@@ -1,0 +1,53 @@
+<h2>SignUp</h2>
+<form [formGroup]="Registerform" (ngSubmit)="handleSubmit(Registerform.value)">
+  
+  <div class="form-group">
+    <label for="customerId">Customer ID</label>
+    <input type="number" id="customerId" formControlName="customerId" required>
+    <div *ngIf="Registerform.get('customerId')?.invalid && Registerform.get('customerId')?.touched">
+      <small *ngIf="Registerform.get('customerId')?.hasError('pattern')">Customer ID must be exactly 7 digits.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" formControlName="username" required>
+    <div *ngIf="Registerform.get('username')?.invalid && Registerform.get('username')?.touched">
+      <small *ngIf="Registerform.get('username')?.hasError('minlength')">Username must be at least 5 characters long.</small>
+      <small *ngIf="Registerform.get('username')?.hasError('pattern')">Username cannot contain digits.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" required>
+    <div *ngIf="Registerform.get('password')?.invalid && Registerform.get('password')?.touched">
+      <small *ngIf="Registerform.get('password')?.hasError('minlength')">Password must be at least 8 characters long.</small>
+      <small *ngIf="Registerform.get('password')?.hasError('pattern')">Password must contain at least 1 uppercase, 1 lowercase, and 1 special character.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" id="confirmPassword" formControlName="confirmPassword" required>
+    <div *ngIf="Registerform.get('confirmPassword')?.invalid && Registerform.get('confirmPassword')?.touched">
+      <small *ngIf="Registerform.get('confirmPassword')?.hasError('required')">Confirm Password is required.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="accountNumber">Account Number</label>
+    <input type="number" id="accountNumber" formControlName="accountNumber" required>
+    <div *ngIf="Registerform.get('accountNumber')?.invalid && Registerform.get('accountNumber')?.touched">
+      <small *ngIf="Registerform.get('accountNumber')?.hasError('minlength')">Account number must be at least 6 digits long.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" [disabled]="Registerform.invalid">Register</button>
+  </div>
+
+  <div>
+    <a (click)="st.toggleComponent()">Login</a> if account exists
+  </div>
+</form>

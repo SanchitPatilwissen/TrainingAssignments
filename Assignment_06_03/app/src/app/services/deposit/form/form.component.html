@@ -1,0 +1,50 @@
+<form class="login-form-deposit" name="login-form-deposit" (submit)="handleSubmit()">
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input
+        type="number"
+        id="amount"
+        name="amount"
+        min="0"
+        required
+        [(ngModel)]="amount"
+        #amountModel="ngModel"
+      />
+      <div *ngIf="amountModel.invalid && amountModel.touched" class="error">
+        Amount is required and must be greater than 0.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="interest">Interest</label>
+      <span id="rate-of-interest-deposit">{{ rate }}%</span>
+    </div>
+  
+    <div class="form-group">
+      <label for="tenure">Tenure (in years)</label>
+      <input
+        type="number"
+        id="tenure"
+        name="tenure"
+        min="1"
+        max="10"
+        placeholder="Must be less than 10 years"
+        [(ngModel)]="tenure"
+        #tenureModel="ngModel"
+        required
+      />
+      <div *ngIf="tenureModel.invalid && tenureModel.touched" class="error">
+        Tenure is required and must be between 1 and 10 years.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <button type="submit" [disabled]="!formValid()">Calculate</button>
+    </div>
+  </form>
+  
+  <div class="form-group" id="maturity-display" *ngIf="isMaturityVisible">
+    <label for="maturity">Maturity Amount</label>
+    <span id="maturity">{{ maturityValue | currency:'INR' }}</span>
+  </div>
+  

@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+/* Basic reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* Flexbox layout for the page */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo{
+    padding: 10px;
+}

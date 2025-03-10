@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>Circle Calculations</h2>
+  
+    <div class="form-group">
+      <label for="radius">Radius:</label>
+      <input type="number" id="radius" name="radius" [(ngModel)]="radius">
+    </div>
+  
+    <div class="results">
+      <p><strong>Diameter:</strong> {{ radius*2 }} units</p>
+      <p><strong>Area:</strong> {{ 3.14*radius*radius }} square units</p>
+      <p><strong>Perimeter:</strong> {{ 2*radius*3.14 }} units</p>
+    </div>
+  </div>
+  

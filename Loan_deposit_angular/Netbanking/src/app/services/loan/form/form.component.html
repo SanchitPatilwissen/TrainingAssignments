@@ -1,0 +1,56 @@
+<form class="login-form" name="loginForm" #form="ngForm" (ngSubmit)="handleSubmit(form)" novalidate>
+    <div class="form-group">
+        <label for="full-name">Applicant's Full name</label>
+        <input type="text" id="full-name" name="full-name" required [(ngModel)]="fullName" #fullNameModel="ngModel">
+        <div *ngIf="fullNameModel.invalid && fullNameModel.touched" class="error">
+            Full name is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="loan-type">Type of Loan</label>
+        <select id="loan-type" name="loan-type" required [(ngModel)]="loanType" (change)="toggleVisibility()"
+            #loanTypeModel="ngModel">
+            <option value="" disabled selected>Select a Loan Type</option>
+            <option value="home">Home Loan</option>
+            <option value="car">Car Loan</option>
+            <option value="personal">Personal Loan</option>
+        </select>
+        <div *ngIf="loanTypeModel.invalid && loanTypeModel.touched" class="error">
+            Loan type is required.
+        </div>
+    </div>
+
+    <div *ngIf="isVisible">
+        <div class="form-group">
+            <label for="interest">Interest</label>
+            <span id="rate-of-interest">{{ rate }} %</span>
+        </div>
+
+        <div class="form-group">
+            <label for="tenure">Tenure (in years)</label>
+            <input type="number" id="tenure" name="tenure" [(ngModel)]="tenure" [min]="minTenure" [max]="maxTenure"
+                required #tenureModel="ngModel" placeholder="{{ tenurePlaceholder() }}">
+            <div *ngIf="tenureModel.invalid && tenureModel.touched" class="error">
+                Tenure is required and should be between {{ minTenure }} and {{ maxTenure }} years.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" [(ngModel)]="amount" [min]="minAmount" [max]="maxAmount"
+                required #amountModel="ngModel" placeholder="{{ amountPlaceholder() }}">
+            <div *ngIf="amountModel.invalid && amountModel.touched" class="error">
+                Amount is required and should be between {{ minAmount | currency : 'INR' }} and {{ maxAmount | currency : 'INR' }}.
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" [disabled]="form.invalid">Calculate</button>
+    </div>
+</form>
+<div class="form-group" id="emi-display" *ngIf="isEmiVisible">
+    <label for="emi">EMI</label>
+    <span id="emi">{{emi | currency : 'INR'}}</span>
+</div>

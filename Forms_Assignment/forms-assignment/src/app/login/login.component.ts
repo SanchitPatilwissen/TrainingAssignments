@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   LoginForm:any;
   
+  constructor(public st : StorageService){}
+  
   ngOnInit(){
     this.LoginForm = new FormGroup({
       customerId: new FormControl("Guest"),
@@ -23,12 +25,12 @@ export class LoginComponent {
 
   submitForm(formValues: any): void {
     if (this.LoginForm.valid) {
+      
       console.log('Form submitted with:', formValues);
     } else {
       console.log('Form is invalid');
     }
   }
 
-  constructor(public st : StorageService){}
 
 }

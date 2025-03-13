@@ -9,6 +9,9 @@ function LoanForm() {
     const [tenureplaceholder, setTenureplaceholder] = useState("");
     const [amtplaceholder, setAmtplaceholder] = useState("");
 
+    const [name, setName] = useState("");
+    const [tenure, setTenure] = useState();
+
     function selectState(e) {
         let selectedOption = e.target.value;
         let maxAmt = 0;
@@ -52,12 +55,17 @@ function LoanForm() {
         setAmtplaceholder("Must be between "+minAmt+" - "+maxAmt+" rupees");
     }
 
+    function calculateEmi(e) {
+        e.preventDefault();
+        console.log(name);
+    }
+
     return (
         <div id="form-content">
-            <form class="login-form" name="login-form">
+            <form class="login-form" name="login-form" onSubmit={(e)=>{calculateEmi(e)}}>
                 <div class="form-group">
-                    <label for="netbanking-id">Applicant's Full name</label>
-                    <input type="text" id="full-name" name="full-name" required></input>
+                    <label for="netbanking-id" onChange={(e)=>setName(e.target.value)}>Applicant's Full name</label>
+                    <input type="text" id="full-name" name="full-name"  required></input>
                 </div>
                 <div class="form-group">
                     <label for="loan-type">Type of Loan</label>
@@ -77,7 +85,7 @@ function LoanForm() {
                         </div>
                         <div class="form-group hidden">
                             <label for="loan-type">Tenure (in years)</label>
-                            <input type="number" id="tenure" name="tenure" min="1" max={maxtenure} placeholder={tenureplaceholder} required></input>
+                            <input type="number" id="tenure" name="tenure" min="1" max={maxtenure} placeholder={tenureplaceholder} onChange={(e)=>{setTenure(e.target.value)}} required></input>
                         </div>
                         <div class="form-group hidden">
                             <label for="netbanking-id">Amount</label>

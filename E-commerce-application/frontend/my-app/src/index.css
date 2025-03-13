@@ -1,0 +1,156 @@
+/* Basic reset for margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Flexbox layout for the page */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo{
+  padding: 10px;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25vh;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  /* Space between the h1 and h5 */
+}
+
+header h5 {
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+/* Content styles */
+.content {
+  flex: 1;
+  /* This makes the content area take up remaining space */
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.content h1 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.content p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer .footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+footer .footer-content p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+footer .social-links {
+  margin-top: 10px;
+}
+
+footer .social-links a {
+  text-decoration: none;
+  color: white;
+  margin: 0 15px;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
+  color: #ff6347;
+  /* Change color on hover */
+}
+
+
+/* Content Layout (Flexbox) */
+.content {
+  display: flex;
+  padding: 20px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  margin-right: 20px;
+}
+
+.sidebar h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #ff6347;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.main-content h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.main-content p {
+  font-size: 18px;
+}

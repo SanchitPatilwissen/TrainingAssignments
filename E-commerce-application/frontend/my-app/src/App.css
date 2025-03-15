@@ -124,3 +124,106 @@ h2 {
 .main-content p {
     font-size: 18px;
 }
+
+#add-product-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.product-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: darkred;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Container for the Orders */
+#orders-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styles */
+.orders-heading {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Orders List */
+#orders-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* Individual Order Item */
+.order-item {
+    background-color: #ffffff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Hover effect for each order */
+.order-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Paragraph Styles for order details */
+.order-product,
+.order-quantity,
+.order-total-price {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Styling for specific fields */
+.order-product {
+    font-weight: bold;
+    color: #333;
+}
+
+.order-quantity,
+.order-total-price {
+    color: #777;
+}
+
+/* Delete Button Styling */
+.delete-order-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for delete button */
+.delete-order-button:hover {
+    background-color: #e60000;
+}

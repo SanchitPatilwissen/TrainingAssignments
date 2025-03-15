@@ -1,52 +1,57 @@
-/* Styling for the vendors container */
 #vendors-container {
-    font-family: 'Arial', sans-serif;
     padding: 20px;
     background-color: #f9f9f9;
-    margin-bottom: 40px;
 }
 
-/* Heading styles */
 .vendors-heading {
     font-size: 2rem;
-    text-align: center;
     margin-bottom: 20px;
-    color: #333;
-    font-weight: bold;
 }
 
-/* Style for the vendor list */
 .vendors-list {
     list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    padding-left: 0;
 }
 
-/* Style for each vendor item */
 .vendor-item {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #2c3e50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.875rem;
+    border-radius: 3px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Hover effect to elevate the vendor card */
-.vendor-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+.delete-button:hover {
+    background-color: #e60000;
 }
 
-/* Optional: Add a subtle effect when a vendor is clicked */
-.vendor-item:active {
-    transform: translateY(0px);
+#add-product-button,
+.product-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#add-product-button:hover,
+.product-button:hover {
+    background-color: #0056b3;
 }

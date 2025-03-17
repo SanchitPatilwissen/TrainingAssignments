@@ -55,3 +55,8 @@
 .product-button:hover {
     background-color: #0056b3;
 }
+
+.vendor-item a {
+    text-decoration: none;
+    color: #000; /* Adjust the color as needed */
+}

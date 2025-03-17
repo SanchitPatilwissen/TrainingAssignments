@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Orders() {
-    const [showOrder, setShowOrder] = useState(true); // Toggle between order list and details view
-    const [orders, setOrders] = useState([]); // Store fetched orders
-    const [selectedOrder, setSelectedOrder] = useState(null); // Store the selected order for detailed view
+    const [showOrder, setShowOrder] = useState(true); 
+    const [orders, setOrders] = useState([]); 
+    const [selectedOrder, setSelectedOrder] = useState(null); 
 
-    // Fetch orders on component mount
     useEffect(() => {
         axios.get('http://localhost:4000/orders')
             .then(response => {
@@ -17,7 +16,6 @@ function Orders() {
             });
     }, []);
 
-    // Delete order function
     function deleteOrder(id) {
         let deleteValue = window.confirm("Are you sure you want to delete this order?");
         if (!deleteValue) {
@@ -26,19 +24,17 @@ function Orders() {
         axios.delete(`http://localhost:4000/orders/${id}`)
             .then(response => {
                 console.log('Order deleted:', response.data);
-                setOrders(orders.filter(order => order.id !== id)); // Update state after deleting
+                setOrders(orders.filter(order => order.id !== id)); 
             })
             .catch(error => {
                 console.error('Error deleting order:', error);
             });
     }
 
-    // Toggle between showing orders or the details of a single order
     function toggleShowOrder() {
         setShowOrder(!showOrder);
     }
 
-    // Show the details of a specific order (products)
     function ShowOrderDetails() {
         if (!selectedOrder) return null;
 
@@ -58,7 +54,6 @@ function Orders() {
         );
     }
 
-    // Show the list of all orders
     function ShowOrders() {
         return (
             <div id="orders-container">

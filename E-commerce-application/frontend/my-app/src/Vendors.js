@@ -1,6 +1,7 @@
 import './Vendors.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Vendors() {
     const [vendors, setVendors] = useState([]);
@@ -40,7 +41,7 @@ function Vendors() {
                 <ul className="vendors-list">
                     {vendors.map((vendor) => (
                         <li key={vendor.id} className="vendor-item">
-                            {vendor.name}
+                            <Link to={`/vendors/${vendor.id}`}>{vendor.name}</Link>
                             <button
                                 className="delete-button"
                                 onClick={() => deleteVendor(vendor.id)}

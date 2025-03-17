@@ -2,11 +2,11 @@
   "products": [
     {
       "id": "1",
-      "name": "iPhone 12",
+      "vendor": 1,
+      "description": "A high-end smartphone with a large display and advanced features.",
       "price": 999,
-      "description": "The latest iPhone model with advanced features.",
-      "quantity": "10",
-      "vendor": 1
+      "name": "iPhone 12",
+      "quantity": 9
     },
     {
       "id": "2",
@@ -39,6 +39,14 @@
       "description": "Keeps the food always cool",
       "quantity": "8",
       "vendor": "4"
+    },
+    {
+      "id": "6",
+      "name": "Ipod",
+      "price": "10000",
+      "description": "Super cool, super powerful earphones",
+      "quantity": "30",
+      "vendor": "1"
     }
   ],
   "vendors": [
@@ -63,24 +71,23 @@
       "name": "Nokia"
     }
   ],
-  "cart": [
-    {
-      "products": [
-        {
-          "id": "1",
-          "name": "iPhone 12",
-          "quantity": 2
-        },
-        {
-          "id": "2",
-          "name": "Samsung Galaxy S21",
-          "quantity": 1
-        }
-      ],
-      "user": "",
-      "totalPrice": 0   
-    }
-  ],
+  "cart": {
+    "products": [
+      {
+        "id": "1",
+        "name": "iPhone 12",
+        "quantity": 2
+      },
+      {
+        "id": "3",
+        "name": "MacBook Pro",
+        "quantity": 2
+      }
+    ],
+    "totalPrice": null,
+    "user": "",
+    "orderId": ""
+  },
   "orders": [
     {
       "id": "1",
@@ -98,6 +105,18 @@
       ],
       "user": "Sanchit",
       "totalPrice": 1998
+    },
+    {
+      "id": "2",
+      "products": [
+        {
+          "id": "1",
+          "name": "iPhone 12",
+          "quantity": 1
+        }
+      ],
+      "totalPrice": null,
+      "user": "Rishabh"
     }
   ]
 }

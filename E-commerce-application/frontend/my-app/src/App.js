@@ -5,6 +5,7 @@ import Vendors from './Vendors';
 import { Link } from 'react-router-dom';
 import Orders from './Orders';
 import Cart from './Cart';
+import VendorDetail from './VendorDetail';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Routes class="services-content">
             <Route path="/" element={<Products />} />
             <Route path="/vendors" element={<Vendors />} />
+            <Route path="/vendors/:id" element={<VendorDetail />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>

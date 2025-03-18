@@ -1,0 +1,122 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "vendor": 1,
+      "description": "A high-end smartphone with a large display and advanced features.",
+      "price": 999,
+      "name": "iPhone 12",
+      "quantity": 9
+    },
+    {
+      "id": "2",
+      "name": "Samsung Galaxy S21",
+      "price": 899,
+      "description": "A high-end Android smartphone with a large display.",
+      "quantity": "5",
+      "vendor": 2
+    },
+    {
+      "id": "3",
+      "name": "MacBook Pro",
+      "price": 1999,
+      "description": "A powerful laptop for professionals and creatives.",
+      "quantity": "2",
+      "vendor": 1
+    },
+    {
+      "id": "4",
+      "name": "Smart LED TV",
+      "price": "10000",
+      "description": "Modern TV built for modern users",
+      "quantity": "10",
+      "vendor": "3"
+    },
+    {
+      "id": "5",
+      "name": "Smart Fridge",
+      "price": "19000",
+      "description": "Keeps the food always cool",
+      "quantity": "8",
+      "vendor": "4"
+    },
+    {
+      "id": "6",
+      "name": "Ipod",
+      "price": "10000",
+      "description": "Super cool, super powerful earphones",
+      "quantity": "30",
+      "vendor": "1"
+    }
+  ],
+  "vendors": [
+    {
+      "id": "1",
+      "name": "Apple"
+    },
+    {
+      "id": "2",
+      "name": "Samsung"
+    },
+    {
+      "id": "3",
+      "name": "Sony"
+    },
+    {
+      "id": "4",
+      "name": "LG"
+    },
+    {
+      "id": "5",
+      "name": "Nokia"
+    }
+  ],
+  "cart": {
+    "products": [
+      {
+        "id": "1",
+        "name": "iPhone 12",
+        "quantity": 2
+      },
+      {
+        "id": "3",
+        "name": "MacBook Pro",
+        "quantity": 2
+      }
+    ],
+    "totalPrice": null,
+    "user": "",
+    "orderId": ""
+  },
+  "orders": [
+    {
+      "id": "1",
+      "products": [
+        {
+          "id": "1",
+          "name": "iPhone 12",
+          "quantity": 2
+        },
+        {
+          "id": "2",
+          "name": "Samsung Galaxy S21",
+          "quantity": 1
+        }
+      ],
+      "user": "Sanchit",
+      "totalPrice": 1998
+    },
+    {
+      "id": "2",
+      "products": [
+        {
+          "id": "1",
+          "name": "iPhone 12",
+          "quantity": 1
+        }
+      ],
+      "totalPrice": null,
+      "user": "Rishabh"
+    }
+  ]
+}

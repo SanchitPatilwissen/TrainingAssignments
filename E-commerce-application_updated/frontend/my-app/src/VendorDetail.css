@@ -1,0 +1,76 @@
+/* Container for the Vendor Detail page */
+#vendor-detail-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+#vendor-detail-container h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#vendor-detail-container h2 {
+    font-size: 2em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Styling for the product list */
+#vendor-products-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#vendor-products-list li {
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+#vendor-products-list li:hover {
+    background-color: #f1f1f1;
+}
+
+#vendor-products-list h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#vendor-products-list p {
+    font-size: 1.1em;
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Styling for the price and quantity */
+#vendor-products-list .product-price {
+    font-weight: bold;
+    color: #4caf50;
+}
+
+#vendor-products-list .product-quantity {
+    font-weight: bold;
+    color: #f44336;
+}
+
+/* Message when no products are found */
+#no-products-message {
+    font-size: 1.2em;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#vendor-detail-container ul {
+    margin-top: 20px;
+}
